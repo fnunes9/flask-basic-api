@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 
+# cria uma instância do serviço
 app = Flask(__name__)
 
 # data
@@ -47,7 +48,7 @@ def add_book():
     book = request.get_json(force=True) 
     dict_to_return = {'OK:': {'book':book}}
     books.append(book)
-    return jsonify(dict_to_return), 200
+    return jsonify(dict_to_return), 201
 
 @app.route('/<int:id>/edit', methods=['GET', 'POST'])
 def edit(id):
@@ -68,17 +69,17 @@ def edit(id):
 
     return "Update successfully!", 200
 
-@app.route('/<int:id>/delete', methods=['POST'])
-def delete(id):
-    book = get_book_by_id(id)
+# TODO
+'''
+Você deverá criar uma rota para deletar um item da base (vetor).
+A rota deve ser no formato "/<id>/delete". Atente-se à variável
+'id'. A requisição é somente para POST. Implemente toda lógica
+necessária para a remoção do item. Dica: use os métodos 
+.index() [1] e o método pop() [2].
+[1] https://www.programiz.com/python-programming/methods/list/index
+[2] https://www.programiz.com/python-programming/methods/list/pop
+'''
 
-    if book is None:
-        return "Error. Resource not found", 404
-
-    idx = books.index(book)
-    books.pop(idx)
-
-    return "Item removed successfully!", 200
 
 
 if __name__ == "__main__":
